@@ -22,13 +22,15 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-// 初始化 AI 客户端
+// 初始化 AI 客户端（支持中转站）
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1'  // 中转站地址
 });
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY
+  apiKey: process.env.ANTHROPIC_API_KEY,
+  baseURL: process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com'  // 中转站地址
 });
 
 // 儿童内容安全过滤
@@ -65,7 +67,7 @@ app.post('/api/generate-cards', async (req, res) => {
 请直接返回 JSON 数组，不要有其他文字。`;
 
     const message = await anthropic.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
+      model: process.env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-20241022',  // 中转站模型名称
       max_tokens: 2000,
       messages: [{ role: 'user', content: prompt }]
     });
@@ -91,7 +93,7 @@ app.post('/api/generate-cards', async (req, res) => {
         if (card.image_prompt) {
           try {
             const image = await openai.images.generate({
-              model: 'dall-e-3',
+              model: process.env.OPENAI_MODEL || 'dall-e-3',  // 中转站模型名称
               prompt: card.image_prompt + ', children book style, bright colors, cute, simple background, no text',
               n: 1,
               size: '1024x1024'
