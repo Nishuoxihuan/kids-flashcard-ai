@@ -11,7 +11,12 @@
 - 📱 响应式设计，支持手机和桌面
 - 🛡️ 内置儿童内容安全过滤
 
-## 🚀 快速开始
+## 🚀 在线演示
+
+- **前端**: https://kids-flashcard-frontend-nishuoxihuan.vercel.app
+- **后端 API**: https://kids-flashcard-backend-nishuoxihuan.vercel.app
+
+## 📦 本地开发
 
 ### 1. 克隆项目
 
@@ -70,9 +75,9 @@ npm run dev
 
 访问 `http://localhost:5173` 查看应用。
 
-## 📦 部署到 Vercel（推荐）
+## 📖 部署到 Vercel
 
-详见 [DEPLOY.md](DEPLOY.md) 中的 Vercel 部署指南。
+详见 [DEPLOY.md](DEPLOY.md) 中的完整部署指南。
 
 ## 🎯 使用示例
 
