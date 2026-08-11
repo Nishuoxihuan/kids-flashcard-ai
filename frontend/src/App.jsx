@@ -1,5 +1,8 @@
 import { useState } from 'react'
 
+// 生产环境 API URL（部署后替换为你的 Vercel 后端 URL）
+const API_URL = import.meta.env.VITE_API_URL || 'https://kids-flashcard-backend.vercel.app'
+
 function App() {
   const [topic, setTopic] = useState('')
   const [ageRange, setAgeRange] = useState('3-5 岁')
@@ -20,7 +23,7 @@ function App() {
     setCards([])
 
     try {
-      const response = await fetch('/api/generate-cards', {
+      const response = await fetch(`${API_URL}/api/generate-cards`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
